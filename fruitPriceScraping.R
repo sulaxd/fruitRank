@@ -14,7 +14,7 @@ remDr$navigate('http://amis.afa.gov.tw/fruit/FruitProdDayTransInfo.aspx')
 show.more$clickElement()
 show.more$sendKeysToElement(list("lynn1027"))
 
-remDr$executeScript('document.getElementById("ctl00_contentPlaceHolder_txtMarket").value = "å…¨éƒ¨å¸‚å ´";document.getElementById("ctl00_contentPlaceHolder_txtProduct").value = "å…¨éƒ¨ç”¢å“";document.getElementById("ctl00_contentPlaceHolder_hfldMarketNo").value = "ALL";document.getElementById("ctl00_contentPlaceHolder_hfldProductNo").value = "ALL";')
+remDr$executeScript('document.getElementById("ctl00_contentPlaceHolder_txtMarket").value = "¥ş³¡¥«³õ";document.getElementById("ctl00_contentPlaceHolder_txtProduct").value = "¥ş³¡²£«~";document.getElementById("ctl00_contentPlaceHolder_hfldMarketNo").value = "ALL";document.getElementById("ctl00_contentPlaceHolder_hfldProductNo").value = "ALL";')
 show.more <- remDr$findElement(using = 'id', "ctl00_contentPlaceHolder_btnQuery")
 show.more$clickElement()
 content <- remDr$getPageSource()
