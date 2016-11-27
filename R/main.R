@@ -2,7 +2,7 @@
 runApp <- function() {
     appDir <- system.file("shiny", "myapp", package = "fruitRank")
     if (appDir == "") {
-        stop("Could not find example directory. Try re-installing `fruiRank`.", call. = FALSE)
+        stop("Could not app directory. Try re-installing `fruiRank`.", call. = FALSE)
     }
 
     shiny::runApp(appDir, display.mode = "normal")
