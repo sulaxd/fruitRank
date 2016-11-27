@@ -22,5 +22,5 @@ nutritDataUpdate <- function(){
 
 #' @export
 getFruitTransData <- function(){
-    tmp2 <- RJSONIO::fromJSON('http://m.coa.gov.tw/OpenData/FarmTransData.aspx') %>% as.data.frame() %>% t()
+    RJSONIO::fromJSON('http://m.coa.gov.tw/OpenData/FarmTransData.aspx') %>% as.data.frame() %>% t()
 }
