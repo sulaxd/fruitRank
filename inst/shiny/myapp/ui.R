@@ -4,12 +4,6 @@ ui <- fluidPage(
   # Create a new Row in the UI for selectInputs
   fluidRow(
     column(4,
-           selectInput("日期",
-                       "日期:",
-                       c("所有日期",
-                         unique(as.character(fruit$日期))))
-    ),
-    column(4,
            selectInput("市場",
                        "市場:",
                        c("所有市場",
