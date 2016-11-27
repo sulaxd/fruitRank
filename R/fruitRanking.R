@@ -68,13 +68,16 @@ grading <- function(nu.df, rda.df, priceTable)
   scoreMat <- magrittr::set_rownames(scoreMat, nu.df[, "作物名稱" ])
   
   ### calculate ranking score
-  scores <- apply(scoreMat[, 1:13], 1, function(x){ return( sum(x * weights)) } ) %>% 
+  scores.today <- apply(scoreMat[, 1:13], 1, function(x){ return( sum(x * weights)) } ) %>% 
     magrittr::divide_by(., priceTable[, "price"]) %>% 
     magrittr::subtract(min(.)) %>% 
     magrittr::divide_by(., sum(.)) %>% 
-    magrittr::multiply_by(100)
+    magrittr::multiply_by(100) %>% 
+    sort(., decreasing = TRUE) %>% 
+    as.data.frame(.) %>% 
+    magrittr::set_colnames(., "Ranking Score")
     
-  return(scores)
+  return(scores.today)
 }
 
 
