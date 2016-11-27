@@ -7,14 +7,18 @@
 由於水果價格每日浮動，透過此CP值排行即可快速的協助使用者進行購買決策。
 
 # 安裝
+```
 library(devtools)
 
 install_github("sulaxd/fruitRank")
+```
 
 # 執行
+```
 library(fruitRank)
 
 run_fruitRank()
+```
 
 # 資料來源
 
