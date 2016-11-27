@@ -3,9 +3,6 @@ server <- function(input, output) {
   # Filter data based on selections
   output$table <- DT::renderDataTable(DT::datatable({
     data <- fruit
-    if (input$日期 != "所有日期") {
-      data <- data[data$日期 == input$日期,]
-    }
     if (input$市場 != "所有市場") {
       data <- data[data$市場 == input$市場,]
     }
