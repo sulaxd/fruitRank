@@ -1,5 +1,9 @@
+#' Rank fruits from various dimensions.
 #' @import shiny
 #' @export
+#' @examples
+#' library(fruitBank)
+#' run_fruitRank()
 run_fruitRank <- function() {
     appDir <- system.file("shiny", "myapp", package = "fruitRank")
     if (appDir == "") {

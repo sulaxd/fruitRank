@@ -1,18 +1,18 @@
-# Define server logic required to draw a histogram
-shinyServer(function(input, output) {
-
-    # Expression that generates a histogram. The expression is
-    # wrapped in a call to renderPlot to indicate that:
-    #
-    #  1) It is "reactive" and therefore should re-execute automatically
-    #     when inputs change
-    #  2) Its output type is a plot
-
-    output$distPlot <- renderPlot({
-        x    <- faithful[, 2]  # Old Faithful Geyser data
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
-    })
-})
+server <- function(input, output) {
+  
+  # Filter data based on selections
+  output$table <- DT::renderDataTable(DT::datatable({
+    data <- fruit
+    if (input$日期 != "所有日期") {
+      data <- data[data$日期 == input$日期,]
+    }
+    if (input$市場 != "所有市場") {
+      data <- data[data$市場 == input$市場,]
+    }
+    if (input$產品 != "所有產品") {
+      data <- data[data$產品 == input$產品,]
+    }
+    data
+  }))
+  
+}
