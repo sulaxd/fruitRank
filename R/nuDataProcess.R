@@ -13,9 +13,9 @@ nutrition <- nutrition[complete.cases(nutrition[,names(recommDS)[-c(1:3)]]),]
 for(i in tmp){
     index <- which(nutrition$食品分類=="水果類" & grepl(i,nutrition$樣品名稱))
     if(length(index)!=0){
-        result <- rbind(result, data.frame(水果名稱=i,t(colMeans(nutrition[index,names(recommDS)[-c(1:3)]])),stringsAsFactors = F))
+        result <- rbind(result, data.frame(水果名稱=i,t(colMeans(nutrition[index,c("水分-成分值(g)",names(recommDS)[-c(1:3)])])),stringsAsFactors = F))
     }
 }
 
 saveRDS(result, file="data/nutritionProcessed.rda")
-names(result) <- c("作物名稱",names(recommDS)[-c(1:3)])
+names(result) <- c("作物名稱","水分-成分值(g)",names(recommDS)[-c(1:3)])
