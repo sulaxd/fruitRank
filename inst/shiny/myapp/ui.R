@@ -20,6 +20,24 @@ ui <- fluidPage(
                        "產品:",
                        c("所有產品",
                          unique(as.character(fruit$產品))))
+    ),
+    column(4,
+           selectInput("年齡",
+                       "年齡:",
+                       c("所有年齡層",
+                         unique(as.character(fruit$產品))))
+    ),
+    column(4,
+           selectInput("性別",
+                       "性別:",
+                       c("性別",
+                         unique(as.character(fruit$產品))))
+    ),
+    column(4,
+           selectInput("懷孕",
+                       "懷孕:",
+                       c("是否懷孕",
+                         unique(as.character(fruit$產品))))
     )
   ),
   # Create a new row for the table.
