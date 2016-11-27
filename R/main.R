@@ -9,6 +9,14 @@ run_fruitRank <- function() {
     if (appDir == "") {
         stop("Could not find app directory. Try re-installing `fruiRank`.", call. = FALSE)
     }
-
-    runApp(appDir, display.mode = "normal")
+    tryCatch(
+        {
+            fruit <<- getFruitTransData()
+            runApp(appDir, display.mode = "normal")
+        },
+        error = function(cond){
+            stop("Error")
+        },
+        finally = rm(list = ls(pos = ".GlobalEnv"), pos = ".GlobalEnv")
+    )
 }
