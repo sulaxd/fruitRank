@@ -1,3 +1,4 @@
+#' @import shiny
 #' @export
 runApp <- function() {
     appDir <- system.file("shiny", "myapp", package = "fruitRank")
