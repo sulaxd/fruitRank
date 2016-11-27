@@ -61,7 +61,7 @@ grading <- function(nu.df, rda.df, priceTable)
   
   ### adjust each fruit's nutrition scores
   for(i in nu.factor[1:13]){
-    scoreMat[1:18, i] <- scale(tmp[, i, with = FALSE], center = desc[i, "mean"], scale = desc[i, "sd"] )
+    scoreMat[1:18, i] <- scale(percentageTable[, i, with = FALSE], center = desc[i, "mean"], scale = desc[i, "sd"] )
   }
   
   ### define rownames
