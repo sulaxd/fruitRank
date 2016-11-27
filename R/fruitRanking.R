@@ -8,11 +8,11 @@ rda.df <- recommDAfilter("50+", "f", "1")
 priceTable <-data.frame(fruit = nu.df[,1], price = sample(20:100, 18, replace = FALSE))
 
 ### create empty data.frame buider
-emptyDF_Builder <- function(rowNum, colNum)
+emptyDF_Builder <- function(cols)
 {
   ### create an empty data.frame with column names only for initial empty table 
   emptyMat <- data.frame(matrix(data = numeric(0), ncol = 14)) %>% 
-    set_colnames(., nu.factor) 
+    magrittr::set_colnames(., cols) 
   
   return(emptyMat)
 }
@@ -58,7 +58,7 @@ grading <- function(nu.df, rda.df, priceTable)
   desc <- psych::describe(percentageTable)
   
   ### create an empty table
-  scoreMat <- emptyDF_Builder()
+  scoreMat <- emptyDF_Builder(cols = nu.factor)
   
   ### adjust each fruit's nutrition scores
   for(i in nu.factor[1:14]){
@@ -69,7 +69,7 @@ grading <- function(nu.df, rda.df, priceTable)
   scoreMat <- magrittr::set_rownames(scoreMat, nu.df[, "水果名稱" ])
   
   ### calculate ranking score
-  scores.today <- apply(scoreMat[, 1:13], 1, function(x){ return( sum(x * weights * 10)) } ) %>% 
+  scores.today <- apply(scoreMat[, 1:14], 1, function(x){ return( sum(x * weights * 10)) } ) %>% 
     magrittr::divide_by(., priceTable[, "price"]) %>%  # for a fruit : total nutrition per 1 kg / today price per kg
     magrittr::subtract(min(.)) %>%  # translation for no negative value shown for in case of misunderstanding
     magrittr::divide_by(., sum(.)) %>%   # divided by sum of each variable for computing percentage
