@@ -9,6 +9,8 @@ Imports:
     RJSONIO,
     rvest,
     shiny,
-    DT
+    DT,
+    data.table,
+    psych
 LazyData: TRUE
 RoxygenNote: 5.0.1
