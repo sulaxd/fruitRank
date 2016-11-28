@@ -1,11 +1,12 @@
 ### load nutrition template
-nu.df <- readRDS("data/nutritionProcessed.rda")
+nu.df <- readRDS("data/nutritionProcessed.rds")
 
+source("R/recommDAprocess.R")
 ### laod RDA template
 rda.df <- recommDAfilter("50+", "f", "1")
 
 ### create price template for temporary use
-priceTable <-data.frame(fruit = nu.df[,1], price = sample(20:100, 18, replace = FALSE))
+priceTable <-data.frame(fruit = nu.df[,1], price = sample(20:100, nrow(nu.df), replace = FALSE))
 
 #' An Auto Empty-Data.Frame Generator
 #'
