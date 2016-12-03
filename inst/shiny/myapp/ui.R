@@ -1,41 +1,35 @@
 ui <- fluidPage(
-  titlePanel("水果-產品日交易行情"),
-  
-  # Create a new Row in the UI for selectInputs
-  fluidRow(
-    column(4,
-           selectInput("市場",
-                       "市場:",
-                       c("所有市場",
-                         unique(as.character(fruit$市場))))
+  titlePanel('Fruit Data'), # Give a title
+  sidebarLayout(
+    sidebarPanel(
+      conditionalPanel(
+        'input.dataset === "Fruit Daily Trade Market"',
+        selectInput('market', '所有市場:',
+          c("所有市場", unique(as.character(fruit$市場)))),
+        hr(),
+        selectInput('products', '所有產品:',
+          c("所有產品", unique(as.character(fruit$產品))))
+      ),
+      conditionalPanel(
+        'input.dataset === "Fruit Nutrition"',
+        selectInput('classification', '所有食品分類:',
+                    c("所有食品", unique(as.character(nutrition$食品分類)))),
+        hr(),
+        selectInput('names', '所有樣品名稱:',
+                    c("所有樣品名稱", unique(as.character(nutrition$樣品名稱))))
+      ),
+      conditionalPanel(
+        'input.dataset === "Fruit Ranking"',
+        helpText('Fruit Ranking Seclect.')
+      )
     ),
-    column(4,
-           selectInput("產品",
-                       "產品:",
-                       c("所有產品",
-                         unique(as.character(fruit$產品))))
-    ),
-    column(4,
-           selectInput("年齡",
-                       "年齡:",
-                       c("所有年齡層",
-                         unique(as.character(fruit$產品))))
-    ),
-    column(4,
-           selectInput("性別",
-                       "性別:",
-                       c("性別",
-                         unique(as.character(fruit$產品))))
-    ),
-    column(4,
-           selectInput("懷孕",
-                       "懷孕:",
-                       c("是否懷孕",
-                         unique(as.character(fruit$產品))))
+    mainPanel(
+      tabsetPanel(
+        id = 'dataset',
+        tabPanel('Fruit Daily Trade Market', DT::dataTableOutput('mytable1')),
+        tabPanel('Fruit Nutrition', DT::dataTableOutput('mytable2')),
+        tabPanel('Fruit Ranking', DT::dataTableOutput('mytable3'))
+      )
     )
-  ),
-  # Create a new row for the table.
-  fluidRow(
-    DT::dataTableOutput("table")
   )
 )
