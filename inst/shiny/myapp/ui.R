@@ -1,5 +1,3 @@
-fruit <- getFruitTransData()
-nutrition <- read.csv("nutrition.csv",header = TRUE,stringsAsFactors = FALSE)
 ui <- fluidPage(
   titlePanel('Fruit Data'), # Give a title
   sidebarLayout(
