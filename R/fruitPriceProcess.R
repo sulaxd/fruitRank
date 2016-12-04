@@ -16,7 +16,8 @@ getOneFruitPrice <- function(.data){
                        '西洋梨','番石榴','蓮霧','芒果','葡萄','西瓜','甜瓜','洋香瓜',
                        '蘋果','柿子','棗子','甘蔗','紅毛丹','榴槤')
     for (f in fruitSelected) {
-        tmp <- .data[startsWith(.data$`作物名稱`, f), ]
+        pattern <- paste0("^", f)
+        tmp <- .data[grepl(pattern, .data$`作物名稱`), ]
         if (nrow(tmp) >= 2) {
             tmp <- tmp[order(tmp$`平均價`)[1], ]
             tmp$`作物名稱` <- f
