@@ -1,12 +1,13 @@
-### load nutrition template
-nu.df <- readRDS("data/nutritionProcessed.rds")
+# ### load nutrition template
+# nu.df <- readRDS("data/nutritionProcessed.rds")
+#
+# source("R/recommDAprocess.R")
+# ### laod RDA template
+# rda.df <- recommDAfilter("50+", "f", "1")
+#
+# ### create price template for temporary use
+# priceTable <-data.frame(fruit = nu.df[,1], price = sample(20:100, nrow(nu.df), replace = FALSE))
 
-source("R/recommDAprocess.R")
-### laod RDA template
-rda.df <- recommDAfilter("50+", "f", "1")
-
-### create price template for temporary use
-priceTable <-data.frame(fruit = nu.df[,1], price = sample(20:100, nrow(nu.df), replace = FALSE))
 
 #' An Auto Empty-Data.Frame Generator
 #'
@@ -44,7 +45,7 @@ emptyDF_Builder <- function(cols)
 #' So, users can daily pick suitable c/p value fruit according to the ranking.
 #' @author Will Kuan <aiien61will@gmail.com>
 #' @export
-grading <- function(nu.df, rda.df, priceTable)
+grading <- function(age, gender, pregnant, rda.df, priceTable)
 {
   if(!requireNamespace("magrittr",quietly = TRUE)){
     install.packages("magrittr"); requireNamespace("magrittr", quietly = TRUE)
@@ -64,6 +65,9 @@ grading <- function(nu.df, rda.df, priceTable)
     requireNamespace("psych", quietly = TRUE)
   }
 
+  source("R/recommDAprocess.R")
+  rda.df <- recommDAfilter("50+", "f", "1")
+
   ### name variables
   nu.factor <- c("水分-成分值(g)", "維生素A效力(2)(RE)-成分值(ug)", "維生素E效力(α-TE)-成分值(mg)",
                  "維生素C-成分值(mg)", "維生素B1-成分值(mg)", "維生素B2-成分值(mg)", "菸鹼素-成分值(mg)",
@@ -76,7 +80,7 @@ grading <- function(nu.df, rda.df, priceTable)
   ### calculate every single fruit's each nutrition percentage
   percentageTable <- apply(nu.df[,3:15], 1, function(x){ return(x/rda.df[,4:16])}) %>%
     data.table::rbindlist(.) %>%
-    magrittr::set_rownames(., nu.df[, "水果名稱" ])
+    magrittr::set_rownames(., nu.df[, "作物名稱" ])
 
   percentageTable[, "水分-成分值(g)" := nu.df[, 2]]
 
@@ -92,7 +96,7 @@ grading <- function(nu.df, rda.df, priceTable)
   }
 
   ### define rownames
-  scoreMat <- magrittr::set_rownames(scoreMat, nu.df[, "水果名稱" ])
+  scoreMat <- magrittr::set_rownames(scoreMat, nu.df[, "作物名稱" ])
 
   ### calculate ranking score
   scores.today <- apply(scoreMat[, 1:14], 1, function(x){ return( sum(x * weights * 10)) } ) %>%
