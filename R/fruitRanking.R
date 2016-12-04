@@ -45,31 +45,18 @@ emptyDF_Builder <- function(cols)
 #' So, users can daily pick suitable c/p value fruit according to the ranking.
 #' @author Will Kuan <aiien61will@gmail.com>
 #' @export
-grading <- function(age, gender, pregnant, priceTable)
+grading <- function(age, gender, pregnant)
 {
-  if(!requireNamespace("magrittr",quietly = TRUE)){
-    install.packages("magrittr"); requireNamespace("magrittr", quietly = TRUE)
-  }else{
-    requireNamespace("magrittr", quietly = TRUE)
-  }
-
-  if(!requireNamespace("data.table",quietly = TRUE)){
-    install.packages("data.table"); requireNamespace("data.table", quietly = TRUE)
-  }else{
-    requireNamespace("data.table", quietly = TRUE)
-  }
-
-  if(!requireNamespace("psych",quietly = TRUE)){
-    install.packages("psych"); requireNamespace("psych", quietly = TRUE)
-  }else{
-    requireNamespace("psych", quietly = TRUE)
-  }
-
   source("R/recommDAprocess.R")
   rda.df <- recommDAfilter(age = age, gender = gender, pregnant = pregnant)
 
-  ### load nu.df
+  ### load nu.df and setkey
   nu.df <- readRDS("data/nutritionProcessed.rds")
+
+  ### setkey for priceTable
+  priceTable <- getAllFruitPrice() %>%
+      data.table::as.data.table() %>%
+      data.table::set2keyv(., "作物名稱")
 
   ### name variables
   nu.factor <- c("水分-成分值(g)", "維生素A效力(2)(RE)-成分值(ug)", "維生素E效力(α-TE)-成分值(mg)",
@@ -86,6 +73,7 @@ grading <- function(age, gender, pregnant, priceTable)
     magrittr::set_rownames(., nu.df[, "作物名稱" ])
 
   percentageTable[, "水分-成分值(g)" := nu.df[, 2]]
+  # percentageTable[, "作物名稱" := nu.df[, 1]]
 
   ### summary
   desc <- psych::describe(percentageTable)
@@ -95,22 +83,26 @@ grading <- function(age, gender, pregnant, priceTable)
 
   ### adjust each fruit's nutrition scores
   for(i in nu.factor[1:14]){
-    scoreMat[1:14, i] <- scale(percentageTable[, i, with = FALSE], center = desc[i, "mean"], scale = desc[i, "sd"] )
+      scoreMat[1:14, i] <- scale(percentageTable[, i, with = FALSE], center = desc[i, "mean"], scale = desc[i, "sd"] )
   }
 
-  ### define rownames
-  scoreMat <- magrittr::set_rownames(scoreMat, nu.df[, "作物名稱" ])
+  ### setkey and merge with priceTable
+  scoreMat <- data.table::as.data.table(scoreMat) %>%
+      .[, "作物名稱" := nu.df[, 1]] %>%
+      data.table::set2keyv(., "作物名稱") %>%
+      merge(priceTable, ., by = "作物名稱")
 
   ### calculate ranking score
-  scores.today <- apply(scoreMat[, 1:14], 1, function(x){ return( sum(x * weights * 10)) } ) %>%
-    magrittr::divide_by(., priceTable[, "price"]) %>%  # for a fruit : total nutrition per 1 kg / today price per kg
-    magrittr::subtract(min(.)) %>%  # translation for no negative value shown for in case of misunderstanding
-    magrittr::divide_by(., sum(.)) %>%   # divided by sum of each variable for computing percentage
-    magrittr::multiply_by(100) %>%  # computing percentage
-    sort(., decreasing = TRUE) %>%
-    magrittr::add(., 1) %>%  # set min score = 1
-    as.data.frame(.) %>%
-    magrittr::set_colnames(., "Ranking Score")
+  scores.today <- apply(subset(scoreMat,,c(5:18)), 1, function(x){ return( sum(x * weights * 10)) } ) %>%
+      magrittr::divide_by(., subset(scoreMat,, c("平均價"))) %>%  # for a fruit : total nutrition per 1 kg / today price per kg
+      magrittr::subtract(min(.)) %>%  # translation for no negative value shown for in case of misunderstanding
+      magrittr::divide_by(., sum(.)) %>%   # divided by sum of each variable for computing percentage
+      magrittr::multiply_by(100) %>%  # computing percentage
+      magrittr::add(., 1) %>%  # set min score = 1
+      cbind(subset(scoreMat,,c(1:4)), .) %>%
+      data.table::setnames(., c("作物名稱", "交易日期", "市場名稱", "平均價", "分數")) %>%
+      data.table::setorderv(., "分數", order = -1) %>%
+      as.data.frame()
 
   return(scores.today)
 }
