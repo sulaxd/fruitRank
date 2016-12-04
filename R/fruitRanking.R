@@ -45,7 +45,7 @@ emptyDF_Builder <- function(cols)
 #' So, users can daily pick suitable c/p value fruit according to the ranking.
 #' @author Will Kuan <aiien61will@gmail.com>
 #' @export
-grading <- function(age, gender, pregnant, rda.df, priceTable)
+grading <- function(age, gender, pregnant, priceTable)
 {
   if(!requireNamespace("magrittr",quietly = TRUE)){
     install.packages("magrittr"); requireNamespace("magrittr", quietly = TRUE)
@@ -66,7 +66,10 @@ grading <- function(age, gender, pregnant, rda.df, priceTable)
   }
 
   source("R/recommDAprocess.R")
-  rda.df <- recommDAfilter("50+", "f", "1")
+  rda.df <- recommDAfilter(age = age, gender = gender, pregnant = pregnant)
+
+  ### load nu.df
+  nu.df <- readRDS("data/nutritionProcessed.rds")
 
   ### name variables
   nu.factor <- c("水分-成分值(g)", "維生素A效力(2)(RE)-成分值(ug)", "維生素E效力(α-TE)-成分值(mg)",
@@ -92,7 +95,7 @@ grading <- function(age, gender, pregnant, rda.df, priceTable)
 
   ### adjust each fruit's nutrition scores
   for(i in nu.factor[1:14]){
-    scoreMat[1:18, i] <- scale(percentageTable[, i, with = FALSE], center = desc[i, "mean"], scale = desc[i, "sd"] )
+    scoreMat[1:14, i] <- scale(percentageTable[, i, with = FALSE], center = desc[i, "mean"], scale = desc[i, "sd"] )
   }
 
   ### define rownames
