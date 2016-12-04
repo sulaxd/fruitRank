@@ -6,9 +6,9 @@ getFruitTransData <- function(){
     }
     d<-fromJSON(urlContent) %>%
         as.data.frame() %>% t() %>% as_data_frame() %>%
-        .[!grepl('[A-Za-z]{2}', .$作物代號), ] %>%
+        .[!grepl('[A-Za-z]{2}', .$`作物代號`), ] %>%
         .[, c(1, 3, 5, 9)]
-    d$平均價 <- as.numeric(d$平均價)
+    d$`平均價` <- as.numeric(d$`平均價`)
     return(d)
 }
 
