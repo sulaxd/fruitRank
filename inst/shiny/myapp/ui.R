@@ -5,10 +5,10 @@ ui <- fluidPage(
       conditionalPanel(
         'input.dataset === "Fruit Daily Trade Market"',
         selectInput('market', '所有市場:',
-          c("所有市場", unique(as.character(fruit$市場)))),
+          c("所有市場", unique(as.character(fruit$市場名稱)))),
         hr(),
         selectInput('products', '所有產品:',
-          c("所有產品", unique(as.character(fruit$產品))))
+          c("所有產品", unique(as.character(fruit$作物名稱))))
       ),
       conditionalPanel(
         'input.dataset === "Fruit Nutrition"',

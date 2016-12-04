@@ -19,5 +19,5 @@ server <- function(input, output) {
   }
   data2
   }))
-  
+
 }
