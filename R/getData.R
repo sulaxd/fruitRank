@@ -1,6 +1,6 @@
-#' @import RJSONIO magrittr tibble
+#' @import RJSONIO magrittr tibble RCurl
 getFruitTransData <- function(){
-    d<-fromJSON('http://m.coa.gov.tw/OpenData/FarmTransData.aspx') %>%
+    d<-fromJSON(getURL("http://m.coa.gov.tw/OpenData/FarmTransData.aspx")) %>%
         as.data.frame() %>% t() %>% as_data_frame() %>%
         .[!grepl('[A-Za-z]{2}', .$作物代號), ] %>%
         .[, c(1, 3, 5, 9)]

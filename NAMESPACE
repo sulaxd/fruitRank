@@ -3,6 +3,7 @@
 export(emptyDF_Builder)
 export(grading)
 export(run_fruitRank)
+import(RCurl)
 import(RJSONIO)
 import(data.table)
 import(magrittr)
