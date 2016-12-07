@@ -2,10 +2,10 @@ server <- function(input, output) {
   output$mytable1 <- DT::renderDataTable(DT::datatable({
   data <- fruit
   if (input$market != "所有市場") {
-  data <- data[data$市場 == input$market,]
+    data <- data[data$市場 == input$market,]
   }
   if (input$products != "所有產品") {
-  data <- data[data$產品 == input$products,]
+    data <- data[data$產品 == input$products,]
   }
   data
   }))
