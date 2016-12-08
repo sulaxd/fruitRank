@@ -1,5 +1,5 @@
 #' Rank fruits from various dimensions.
-#' @import shiny
+#' @importFrom shiny runApp
 #' @export
 #' @examples
 #' library(fruitBank)
@@ -11,11 +11,11 @@ run_fruitRank <- function() {
     }
     tryCatch(
         {
-            fruit <<- getFruitTransData()
+            dailyFruitPrice <<- getFruitTransData()
             runApp(appDir, display.mode = "normal")
         },
         error = function(cond){
-            stop("Error")
+            print(cond)
         },
         finally = rm(list = ls(pos = ".GlobalEnv"), pos = ".GlobalEnv")
     )

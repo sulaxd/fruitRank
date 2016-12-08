@@ -2,26 +2,14 @@
 % Please edit documentation in R/fruitRanking.R
 \name{grading}
 \alias{grading}
-\title{Grade and Score Each Fruit}
+\title{Score Each Fruit}
 \usage{
-grading(age, gender, pregnant, rda.df, priceTable)
-}
-\arguments{
-\item{rda.df}{Rcommended Dietary Allowance data.frame for each group of different age, gender, and body condition.}
-
-\item{priceTable}{a table contains fruit names and each market price.}
-
-\item{nu.df}{nutrition data.frame which is consist of variabls including fruit name, each nutritions.}
+grading(age, gender, pregnant)
 }
 \description{
-According price, nutrition, ..., etc. to score c/p value of each fruit.
-}
-\details{
-To rank and calculate each fruit c/p value score which considers what nutrition it contains and how much daily price it is.
-
-So, users can daily pick suitable c/p value fruit according to the ranking.
+Calculate score of each fruit based on its price and nutrition.
 }
 \author{
-Will Kuan <aiien61will@gmail.com>
+Will Kuan <aiien61will@gmail.com> Conner Chang
 }
 

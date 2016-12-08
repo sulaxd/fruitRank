@@ -1,7 +1,10 @@
-#' @import magrittr
+#' @importFrom magrittr %>%
+#' @importFrom magrittr set_rownames
 getAllFruitPrice <- function(){
-    dat <- getFruitTransData()
-    lapply(split(dat, dat$market), function(args){
+    if (!exists("dailyFruitPrice")) {
+        dailyFruitPrice <- getFruitTransData()
+    }
+    lapply(split(dailyFruitPrice, dailyFruitPrice$market), function(args){
         getOneFruitPrice(args)
     }) %>%
         do.call("rbind", .) %>%

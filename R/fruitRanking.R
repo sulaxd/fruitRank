@@ -1,7 +1,7 @@
 #' Score Each Fruit
 #'
 #' Calculate score of each fruit based on its price and nutrition.
-#' @import magrittr
+#' @importFrom magrittr %>%
 #' @author Will Kuan <aiien61will@gmail.com> Conner Chang
 #' @export
 grading <- function(age, gender, pregnant)
@@ -10,7 +10,7 @@ grading <- function(age, gender, pregnant)
     ### get priceDF
     priceDF <- getAllFruitPrice()
     ### calculate every single fruit's each nutrition percentage
-    percentageTable <- apply(nuDF[,3:15],
+    percentageTable <- apply(nuDF[, 3:15],
                                1,
                                function(x){ x / rdaDF}) %>%
                         do.call("rbind", .)
@@ -36,5 +36,3 @@ grading <- function(age, gender, pregnant)
     scoresDF$score <- NULL
     return(scoresDF)
 }
-
-

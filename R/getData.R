@@ -1,4 +1,6 @@
-#' @import RCurl RJSONIO magrittr
+#' @importFrom magrittr %>%
+#' @importFrom RCurl getURL
+#' @importFrom RJSONIO fromJSON
 getFruitTransData <- function(){
     urlContent <- getURL("http://m.coa.gov.tw/OpenData/FarmTransData.aspx")
     if (Sys.info()[1] == "Windows") {

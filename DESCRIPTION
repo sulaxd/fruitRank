@@ -1,6 +1,6 @@
 Package: fruitRank
 Type: Package
-Title: Perform fruit rankings
+Title: Rank fruits based on their prices and nutritions
 Version: 0.1.0
 Author: Who wrote it
 Imports:
