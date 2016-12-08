@@ -2,7 +2,7 @@
 #'
 #' Calculate score of each fruit based on its price and nutrition.
 #' @importFrom magrittr %>%
-#' @author Will Kuan <aiien61will@gmail.com> Conner Chang
+#' @author Will Kuan <aiien61will@gmail.com>, Conner Chang
 #' @export
 grading <- function(age, gender, pregnant)
 {
@@ -34,5 +34,7 @@ grading <- function(age, gender, pregnant)
                             `*`(100) %>%
                             `+`(1)
     scoresDF$score <- NULL
+    scoresDF$final_score <- round(scoresDF$final_score, digits = 3) %>%
+                                as.numeric()
     return(scoresDF)
 }

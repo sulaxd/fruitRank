@@ -22,5 +22,5 @@ server <- function(input, output) {
             data3 <- grading(input$age, input$gender, input$pregnant)
             colnames(data3) <- c("日期", "水果", "市場", "平均價格", "分數")
             data3
-    }) %>% DT::formatRound('分數', 2))
+    }))
 }

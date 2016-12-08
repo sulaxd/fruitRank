@@ -10,6 +10,6 @@ grading(age, gender, pregnant)
 Calculate score of each fruit based on its price and nutrition.
 }
 \author{
-Will Kuan <aiien61will@gmail.com> Conner Chang
+Will Kuan <aiien61will@gmail.com>, Conner Chang
 }
 
