@@ -20,6 +20,21 @@ library(fruitRank)
 run_fruitRank()
 ```
 
+# 畫面簡介
+## 最新水果價格
+![image](https://cloud.githubusercontent.com/assets/5773822/21128998/05c95f98-c13a-11e6-8d04-6b825d12be62.png)
+
+## 水果營養
+![image](https://cloud.githubusercontent.com/assets/5773822/21129024/2e5f51e2-c13a-11e6-996d-a852e459b1b1.png)
+
+## 水果排名
+- 目前較為困難之處：
+    - 水果種類繁多，分類上較不容易，例如以**農產品行情資料來源**的水果關鍵字：
+        - 「鳳梨」：釋迦-鳳梨釋迦、鳳梨-其他、鳳梨-牛奶鳳梨、鳳梨-開英、鳳梨-進口、鳳梨-金鑽鳳梨
+    - 不同資料來源(**農產品行情**與**食品營養成分**)的水果名稱不同，難以對應(Mapping)，下方以**食品營養成分**為例：
+        - 「鳳梨」：突目1號鳳梨、鳳梨平均值(雜交種)、甘蔗鳳梨、甜蜜蜜鳳梨、金鑽鳳梨、牛奶鳳梨、鳳梨釋迦
+![image](https://cloud.githubusercontent.com/assets/5773822/21129036/3aa013ce-c13a-11e6-93c8-b0cefe5cdb60.png)
+
 # 資料來源
 
 1. [農產品行情](http://m.coa.gov.tw/OpenData/FarmTransData.aspx)
