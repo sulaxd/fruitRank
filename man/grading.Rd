@@ -2,8 +2,9 @@
 % Please edit documentation in R/fruitRanking.R
 \name{grading}
 \alias{grading}
-\title{Grade and Score Each Fruit}
+\title{Score Each Fruit}
 \usage{
+<<<<<<< HEAD
 grading(age, gender, pregnant, priceTable)
 }
 \arguments{
@@ -12,16 +13,14 @@ grading(age, gender, pregnant, priceTable)
 \item{nu.df}{nutrition data.frame which is consist of variabls including fruit name, each nutritions.}
 
 \item{rda.df}{Rcommended Dietary Allowance data.frame for each group of different age, gender, and body condition.}
+=======
+grading(age, gender, pregnant)
+>>>>>>> 52ea9c759b14dd82a49e65c9a1fc9fffded6db1a
 }
 \description{
-According price, nutrition, ..., etc. to score c/p value of each fruit.
-}
-\details{
-To rank and calculate each fruit c/p value score which considers what nutrition it contains and how much daily price it is.
-
-So, users can daily pick suitable c/p value fruit according to the ranking.
+Calculate score of each fruit based on its price and nutrition.
 }
 \author{
-Will Kuan <aiien61will@gmail.com>
+Will Kuan <aiien61will@gmail.com>, Conner Chang
 }
 
