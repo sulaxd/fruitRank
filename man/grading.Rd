@@ -4,14 +4,14 @@
 \alias{grading}
 \title{Grade and Score Each Fruit}
 \usage{
-grading(age, gender, pregnant, rda.df, priceTable)
+grading(age, gender, pregnant, priceTable)
 }
 \arguments{
-\item{rda.df}{Rcommended Dietary Allowance data.frame for each group of different age, gender, and body condition.}
-
 \item{priceTable}{a table contains fruit names and each market price.}
 
 \item{nu.df}{nutrition data.frame which is consist of variabls including fruit name, each nutritions.}
+
+\item{rda.df}{Rcommended Dietary Allowance data.frame for each group of different age, gender, and body condition.}
 }
 \description{
 According price, nutrition, ..., etc. to score c/p value of each fruit.
