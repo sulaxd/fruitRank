@@ -63,5 +63,9 @@ run_fruitRank()
 
 1. 對各水果的營養成分變數值進行加總後，除以每日各水果之每公斤批發價，即視為該水果每公斤所含的「總營養加總分數」
 
+# License
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/"><img alt="創用 CC 授權條款" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/tw/88x31.png" /></a>
+
+fruitRank由[Will Kuan](https://github.com/Willdata)、[Conner Chang](https://github.com/ConnerChang)、[Deron Liu](https://github.com/deli1028)和[Andrew Tang](https://github.com/sulaxd)共同製作，以<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/">創用CC 姓名標示-相同方式分享 3.0 台灣 授權條款</a>釋出。
 
